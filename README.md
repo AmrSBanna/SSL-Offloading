@@ -19,25 +19,18 @@ Let's take for example HAProxy as SSL Offloading proxy in our use case to make i
 I assumed that those 25,000 requests are active flows/connections per second. As quoted by Adam Langley from Google "On our production frontend machines, SSL/TLS accounts for less than 1% of the CPU load, less than 10 KB of memory per connection and less than 2% of network overhead. Many people believe that SSL/TLS takes a lot of CPU time and we hope the preceding numbers will help to dispel that." In addition to that Elliptic Curve Diffie-Hellman (ECDHE) is only a little more expensive than RSA for an equivalent security level. This means the 25,000 requets would conusme ~250MB of 64GB. This means that our SSL-Offloading can handle incoming traffic in acceptable manner. 
 
 
-### Metric/Observability:
+### Observability Metrics:
 To be able to maintain always-on applications, we need uninterruptedly monitoring and provide self-healing mechanism based on actionable insights. In my opinion teh below metrics are important  to monitor SSL-Offloading proxy.
-1. **CPU load:**
-   SSL-Offloading is CPU sensitive process.
 
-2. **Increase in file descriptor:**
-   Many applications such as Apache web server needs this range quite higher. So we need to monitor it carefully to proactively take an actionable insight. The increase of FD could happen from slower responses and higher wait time
-
-3. **_TCP Open Connections:_**
-   To monitor the TCP connection Internet <-> Proxy <-> Backend
-
-4. **_SSL certificate expiry on proxy server_**
-   Certificates renewals is a common practice that needs to be renewed occasionally. It's always forgotten. When it expires, it will generate security errors.
-
-5. **_Memory Free:_**
-   Monitor consumed and free memory on the server
-
-6. **_SSL-Offloading proxy server process still alive:_**
-   This can be performed using Nagios. Nagios provides complete monitoring of Linux processes. Nagios is capable of monitoring the state of any Linux process (Apache, MySQL, BIND, etc) and alerting you when the process stopped or crashed. 
+Metric Name | Description  
+--- | --- | 
+CPU load | SSL-Offloading is CPU sensitive process. 
+Increase in file descriptor | Many applications such as Apache web server needs this range quite higher. So we need to monitor it carefully to proactively take an actionable insight. The increase of FD could happen from slower responses and higher wait time
+TCP Open Connections | To monitor the TCP connection Internet <-> Proxy <-> Backend
+SSL certificate expiry on proxy server | Certificates renewals is a common practice that needs to be renewed occasionally. It's always forgotten. When it expires, it will generate security errors.
+Memory Free | Monitor consumed and free memory on the server 
+SSL-Offloading proxy server process still alive | This can be performed using Nagios. Nagios provides complete monitoring of Linux processes. Nagios is capable of monitoring the state of any Linux process (Apache, MySQL, BIND, etc) and alerting you when the process stopped or crashed.    
+    
 
    > _There are some additional useful general metrics:_
    > - HealthyHostCount
@@ -55,6 +48,6 @@ To be able to maintain always-on applications, we need uninterruptedly monitorin
 5. Monitoring of Monitoring and HA of monitoring itself : Its always challenge.
 
 Acronyms:
-LB: Load Balance
+LB: Load Balancer
 L4: Layer 4 (Transport Layer) OSI model
 L7: Layer 7 (Application Layer) OSI model
