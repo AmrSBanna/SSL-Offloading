@@ -6,7 +6,7 @@ from/to client. It stores the logs in textual format. It extracts values such as
 others on the frontend and backend. Those values get collected, aggregated, and computed to represent metrics. The 
 observability of those metrics help in self-healing and services uninterrupted.
 
-![alt text](https://github.com/AmrSBanna/SSL-Offloading/blob/main/SSL-Offloading.jpg?raw=true)
+![alt text](https://github.com/AmrSBanna/SSL-Offloading/blob/main/images/SSL-Offloading.jpg?raw=true)
 
 THIS SECTION SHOULD BE REMOVED
 ### Requests distribution:
