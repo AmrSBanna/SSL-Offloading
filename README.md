@@ -132,7 +132,7 @@ After restarting HAProxy with your modified configuration, you can access a stat
 authenticating via HAProxy status page. It is great for a quick, human-readable view but not suitable for automation or
 machine readable format. 
 
-> URL: http://<MyHAProxyServer>:9000/haproxy_stats
+> URL: http://MyHAProxyServer:9000/haproxy_stats
 
 ```
  listen stats
