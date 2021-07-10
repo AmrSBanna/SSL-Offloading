@@ -20,16 +20,13 @@ global
     group haproxy
     # expose stats to socket
     stats socket /run/haproxy/admin.sock user haproxy group haproxy mode 660 level admin
-    nbproc 2
-    nbthread 4
-    cpu-map auto:1/1-4 0-3
     ssl-default-bind-ciphers ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256
     ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
     
 frontend www.ajdustwebsite.com
    bind *:80
    # Enable SSL Offloading/Termination  <------- This is very crucial for our use case
-   bind *:443 ssl crt /Users/HusseinNasser/proxy/haproxy.pem alpn h2,http/1.1
+   bind *:443 ssl crt /Users/Amr/proxy/haproxy.pem alpn h2,http/1.1
    timeout client 60s
    mode http
    http-request redirect scheme https unless { ssl_fc }
@@ -53,23 +50,21 @@ ingress controller, getting meaningful logs out of HAProxy is a must-have.
 
 ![alt text](https://github.com/AmrSBanna/SSL-Offloading/blob/main/images/FE_and_BE_metrics.jpg?raw=true)
 
-Logging gives you insights about each connection and request. It enables observability needed for troubleshooting and
-can even be used to detect problems at earliest stages. It’s one of the many ways to get information from HAProxy. 
-Other ways include getting metrics using the Stats page or Runtime API, setting up email alerts, and making use of the 
-various open-source integrations for storing log or statistical data over time. HAProxy provides very detailed logs 
-with millisecond accuracy and generates a wealth of information about traffic flowing into your infrastructure. This 
-includes:
+Insights for connections and requests can be extracted from logging.  
+
+Logging gives you insights about each connection and request. It allows variety of observability mechanisms that're 
+needed for troubleshooting and create actionable insights at the earliest stages of the problems. Metrics can be created
+using the Stats page or Runtime API. Also alrets can be generated based on certain threshold by setting up email, SMSs,
+or slack. There are various open-source tools for storing log or statistical data over time that enable metrics 
+creations such as
  - Metrics about the traffic: timing data, connections counters, traffic size, etc.
  - Information about HAProxy decisions: content switching, filtering, persistence, etc.
  - Information about requests and responses: headers, status codes, payloads, etc.
  - Termination status of a session and the ability to track where failures are occurring on client or server side
 
-One of the many ways to get information from HAProxy. Other ways include getting metrics using the *_Stats page_* or 
-*_Runtime API_*, setting up email alerts Termination status of a session and the ability to track where failures are 
-occurring (client side, server side?) HAProxy can emit log message for processing by a syslog server. This is compatible
-with familiar syslog tools like Rsyslog, as well as the newer systemd service journald. You can also utilize various log
-forwarders like Logstash and Fluentd to receive Syslog messages
-
+On way of getting metrics using the *_Stats page_* or *_Runtime API_*. HAProxy can transfer those log message for 
+processing by a syslog server. This is compatible with familiar syslog tools like Rsyslog, as well as the newer 
+systemd service journald. You can also utilize various log forwarders like Logstash and Fluentd to receive Syslog messages
 
 
 ### Frontend Metrics
