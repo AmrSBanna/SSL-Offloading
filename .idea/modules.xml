@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SSL-Offloading.iml" filepath="$PROJECT_DIR$/.idea/SSL-Offloading.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/Scandit/.idea/Scandit.iml" filepath="$USER_HOME$/PycharmProjects/Scandit/.idea/Scandit.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/ada_test/.idea/ada_test.iml" filepath="$USER_HOME$/PycharmProjects/ada_test/.idea/ada_test.iml" />
+      <module fileurl="file://$USER_HOME$/ada/cli-tool/.idea/cli-tool.iml" filepath="$USER_HOME$/ada/cli-tool/.idea/cli-tool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../randomizer-cli-tool/.idea/randomizer-cli-tool.iml" filepath="$PROJECT_DIR$/../randomizer-cli-tool/.idea/randomizer-cli-tool.iml" />
     </modules>
   </component>
 </project>
